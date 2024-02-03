@@ -25,7 +25,7 @@ rm -f ~/.script_init_done
 (crontab -l | grep -v '/bin/bash ~/server.sh cleanup_old_backups') | crontab -
 
 # 홈 디렉토리에서 server.sh 삭제
-rm -f ~/server.sh
+rm -f ~/remove_script.sh
 
 echo "모든 서비스, 파일 및 cron 작업이 성공적으로 제거되었습니다."
 
