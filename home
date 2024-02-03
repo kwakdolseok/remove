@@ -1,0 +1,38 @@
+#!/bin/bash
+
+VERSION="0.10.0"
+
+# 서비스 중지
+sudo systemctl stop palserver
+
+# 서비스 비활성화
+sudo systemctl disable palserver
+
+# 서비스 파일 삭제
+sudo rm -f /etc/systemd/system/palserver.service
+
+# systemd 재로드
+sudo systemctl daemon-reload
+
+# 백업 파일 및 디렉토리 삭제
+rm -rf ~/backup
+
+# 스크립트 초기화 플래그 파일 삭제
+rm -f ~/.script_init_done
+
+# cron 작업 제거
+(crontab -l | grep -v '/bin/bash ~/server.sh compress_folder') | crontab -
+(crontab -l | grep -v '/bin/bash ~/server.sh cleanup_old_backups') | crontab -
+
+# 홈 디렉토리에서 server.sh 삭제
+rm -f ~/server.sh
+
+echo "모든 서비스, 파일 및 cron 작업이 성공적으로 제거되었습니다."
+
+echo -e "\n지금까지 구동기를 이용해 주셔서 감사합니다."
+echo "현재 마루타 버전($VERSION)은 게임 실행 및 게임 종료가 어려워하시는 분들을 위해 제작되었습니다."
+echo "하지만 게임사의 버그로 구동기 사용 후 게임 데이터가 없어졌다고 욕하는 분들이 많았습니다."
+
+echo -e "\n그래서 어쩔 수 없이 구동기는 이제 사용 제한됩니다."
+echo "구동기를 요청하시는 분들이 많으시면 유료로 판매하고, 욕을 먹도록 하겠습니다."
+echo "그동안 이용해 주셔서 감사합니다."
